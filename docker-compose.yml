@@ -17,6 +17,7 @@ services:
 #       - todo 
       networks:
         - backend
+        - frontend
 
     todo:
       build:
