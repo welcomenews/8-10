@@ -79,7 +79,7 @@ COPY requirements.txt /opt/
 RUN pip install -r /opt/requirements.txt
 COPY ./supervisor/supervisord.conf /etc/supervisor/
 ARG WORK_DIR=/var/www
-RUN usermod -u 1000 www-data
+RUN usermod -u 1000 www-data && mkdir -p /var/www/todo/logs
 WORKDIR ${WORK_DIR}
 CMD [ "/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf" ]
 expose 9000

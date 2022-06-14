@@ -2,8 +2,9 @@ FROM python:2.7-stretch
 USER root
 # uWSGI:
 RUN pip install uwsgi
+RUN mkdir /etc/uwsgi/
 # Copy the base uWSGI ini file to enable default dynamic uwsgi process number
-COPY uwsgi.ini /etc/uwsgi/
+COPY uwsgi.ini /etc/uwsgi/uwsgi.ini
 # Which uWSGI .ini file should be used, to make it customizable
 ENV UWSGI_INI /etc/uwsgi/uwsgi.ini
 # By default, run 2 processes
@@ -71,7 +72,7 @@ RUN pip install -r /opt/requirements.txt
 ARG WORK_DIR=/var/www
 RUN usermod -u 1000 www-data
 WORKDIR ${WORK_DIR}
-CMD [ "uwsgi" ]
+CMD ["uwsgi"]
 #PORT
 EXPOSE 9000
 
